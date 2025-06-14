@@ -1,6 +1,6 @@
 *, *::before, *::after {
     box-sizing: border-box;
-    font-family: "open sans"
+    font-family: "open sans", sans serif;
 }
 
 body {
