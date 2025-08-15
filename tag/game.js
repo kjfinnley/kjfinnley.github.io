@@ -41,155 +41,106 @@ function selectOption(option) {
 }
 
 const textNodes = [
-    {
-        id: 1,
-        text: 'You wake up in a strange place and see a jar of blue goo near you.',
-        options: [
-            {
-                text: 'Take the goo',
-                setState: { blueGoo: true },
-                nextText: 2
-            },
-            {
-                text: 'Leave the goo',
-                nextText: 2
-            }
-        ]
-    },
-    {
-        id: 2,
-        text: 'You set out to uncover where you are and soon come across a wandering merchant.',
-        options: [
-            {
-                text: 'Trade the goo for a sword',
-                requiredState: (currentState) => currentState.blueGoo,
-                setState: { blueGoo: false, sword: true },
-                nextText: 3
-            },
-            {
-                text: 'Trade the goo for a shield',
-                requiredState: (currentState) => currentState.blueGoo,
-                setState: { blueGoo: false, shield: true },
-                nextText: 3
-            },
-            {
-                text: 'Ignore the merchant',
-                nextText: 3
-            },
-        ]
-    },
-    {
-        id: 3,
-        text: 'After leaving the merchant you start to feel tired and stumble upon a small town next to a dangerous looking castle.',
-        options: [
-            {
-                text: 'Explore the castle',
-                nextText: 4
-            },
-            {
-                text: 'Find a room to sleep at in the town',
-                nextText: 5
-            },
-            {
-                text: 'Find some hay in a stable to sleep in',
-                nextText: 6
-            },
-        ]
-    },
-    {
-        id: 4, 
-        text: 'You are so tired that you fall asleep while exploring the castle and are killed by a monster in your sleep.',
-        options: [
-            {
-                text: 'Restart',
-                nextText: -1
-      }
-    ]
+  {
+      id: 1,
+      text: `You wake up on a bed of moss and pine needles, the air is cool and damp. Trees tower around you in every direction. You don't know where you are... or how you got here. Your head throbs.\n
+Standing over you is a large, grey wolf with calm golden eyes. She's not growling. Instead, she sits silently, watching you. Around her neck is a worn leather collar with a name tag. The tag reads "Tala".\n
+Next to you, half-buried under leaves, is a sword. Its blade glints in a shaft of morning light.\n
+What do you do?`,
+      options: [
+          {
+              text: 'Take the sword.',
+              setState: { takeSword: true },
+              nextText: 2
+          },
+          {
+              text: 'Leave the sword.',
+              setState: { takeSword: false },
+              nextText: 3
+          }
+      ]
   },
   {
-    id: 5,
-    text: 'Without any money to buy a room you break into the nearest inn and fall asleep. After a few hours of sleep the owner of the inn finds you and has the town guard lock you in a cell.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
+      id: 2,
+      text: `Unsure of where you are, you decide to head east. You and Tala begin walking. After what feels like an hour of silent hiking, Tala stops suddenly. Her ears twitch. You hear it too—a low growl, deep and guttural.\n
+A massive brown bear lumbers into the clearing ahead, snorting, its eyes locked on you.\n
+Tala snarls and lowers herself into a defensive stance.`,
+      options: [
+          {
+              text: 'Attack the bear.',
+              requiredState: (currentState) => currentState.takeSword,
+              nextText: 4
+          },
+          {
+              text: 'Run away.',
+              requiredState: (currentState) => currentState.takeSword,
+              nextText: 5
+          }
+      ]
   },
   {
-    id: 6,
-    text: 'You wake up well rested and full of energy ready to explore the nearby castle.',
-    options: [
-      {
-        text: 'Explore the castle',
-        nextText: 7
-      }
-    ]
+      id: 3,
+      text: `Unsure of where you are, you decide to head east. You and Tala begin walking. After what feels like an hour of silent hiking, Tala stops suddenly. Her ears twitch. You hear it too—a low growl, deep and guttural.\n
+A massive brown bear lumbers into the clearing ahead, snorting, its eyes locked on you.\n
+Tala whimpers softly and steps back, pressing against your leg.`,
+      options: [
+          {
+              text: 'Attack the bear.',
+              requiredState: (currentState) => !currentState.takeSword,
+              nextText: 6
+          },
+          {
+              text: 'Run away.',
+              requiredState: (currentState) => !currentState.takeSword,
+              nextText: 7
+          }
+      ]
   },
   {
-    id: 7,
-    text: 'While exploring the castle you come across a horrible monster in your path.',
-    options: [
-      {
-        text: 'Try to run',
-        nextText: 8
-      },
-      {
-        text: 'Attack it with your sword',
-        requiredState: (currentState) => currentState.sword,
-        nextText: 9
-      },
-      {
-        text: 'Hide behind your shield',
-        requiredState: (currentState) => currentState.shield,
-        nextText: 10
-      },
-      {
-        text: 'Throw the blue goo at it',
-        requiredState: (currentState) => currentState.blueGoo,
-        nextText: 11
-      }
-    ]
+      id: 4,
+      text: `You raise your sword and rush forward. Just as the bear rears up, Tala lunges, snapping at its side. The distraction is enough. You slide behind the bear and drive the sword deep into its back. It roars... then collapses.\n
+You and Tala continue eastward, shaken but alive.`,
+      options: [
+          {
+              text: 'Play again',
+              nextText: -1
+          }
+      ]
   },
   {
-    id: 8,
-    text: 'Your attempts to run are in vain and the monster easily catches you.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
+      id: 5,
+      text: `You turn to run, but the weight of the sword slows you down. The bear charges—Tala tries to bark a warning, but it's too late.\n
+You feel the weight of the bear slam into you, and then… nothing.\n
+You died.`,
+      options: [
+          {
+              text: 'Restart',
+              nextText: -1
+          }
+      ]
   },
   {
-    id: 9,
-    text: 'You foolishly thought this monster could be slain with a single sword.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
+      id: 6,
+      text: `You leap at the bear with nothing but your fists and courage. It isn't enough.\n
+The bear swipes at you and everything goes dark.\n
+You died.`,
+      options: [
+          {
+              text: 'Restart',
+              nextText: -1
+          }
+      ]
   },
   {
-    id: 10,
-    text: 'The monster laughs as you hide behind your shield and kills you easily.',
-    options: [
-      {
-        text: 'Restart',
-        nextText: -1
-      }
-    ]
-  },
-  {
-    id: 11,
-    text: 'You threw your jar of goo at the monster and it exploded. After the dust settled you saw the monster was destroyed. Seeing your victory you decide to claim this castle as your and live out the rest of your days there.',
-    options: [
-      {
-        text: 'Congratulations. Play Again.',
-        nextText: -1
-      }
-    ]
+      id: 7,
+      text: `You and Tala sprint through the trees. The bear gives chase for a few heartbeats, then turns back. It wasn't worth the effort.\n
+You slow down, breathless. You're alive.`,
+      options: [
+          {
+              text: 'Play again',
+              nextText: -1
+          }
+      ]
   }
 ]
 
