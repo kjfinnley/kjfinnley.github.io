@@ -1,3 +1,9 @@
+document.addEventListener('click', jump);
+document.addEventListener('touchstart', function(e) {
+    e.preventDefault(); // prevent accidental scrolling
+    jump();
+});
+
 var character = document.getElementById("character");
 const img = new Image(50, 30);
 img.src = 'bordercollie2.png';
