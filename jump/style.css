@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#game {
+    width: 500px;
+    height: 200px;
+    background-image: url(background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    transform: scale(3);
+    transform-origin: top left;
+    position: relative;
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 8px;
+    color: white;
+    font-family: Lato, sans-serif;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+#character {
+    width: 50px;
+    height: 30px; 
+    position: relative;
+    top: 170px;
+}
+
+.animate {
+    animation: jump 500ms;
+}
+
+@keyframes jump {
+    0% { top: 170px; }
+    50% { top: 120px; }
+    100% { top: 170px; }
+}
+
+#block {
+    width: 30px;
+    height: 24px;
+    position: relative;
+    top: 146px;
+    left: 446px;
+    animation: block 1s infinite linear;
+}
+
+@keyframes block {
+    0% { left: 480px; }
+    100% { left: -40px; }
+}
